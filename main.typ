@@ -1,4 +1,4 @@
-#import "@preview/lilaq:0.5.0"
+#import "@preview/lilaq:0.5.0" as lq
 
 #set page(background: image("01_Diodes.jpg"))
 #v(206pt)
@@ -28,6 +28,10 @@ Milan Fark
   left_header: [Jakob Haverkamp \ Milan Fark \ jh1444, #h(5pt)mf643],
 )
 #counter(page).update(1)
+#set text(
+  lang: "en",
+  size: 12pt,
+)
 
 = 1.2 A variety of diodes
 
@@ -38,8 +42,23 @@ The goal of the Simulation is to measure the characteristics of different Types 
 
 == Circuit Diagrams
 
-#image("121_BAT41.jpg")
+#figure(caption: "")[
+  #image("121_BAT41.jpg")
+]
+#let (x, y) = lq.load-txt(read("./zenerdiodedata.txt"), delimiter: "\t", skip-rows: 1)
 
+== Plots:
+
+#lq.diagram(
+  width: 100%,
+  height: 40%,
+  title: [IV-Curves],
+  xlabel: $x s$,
+  ylabel: $y$,
+
+  lq.plot(x, y, mark: ".", label: [ZD3V9], mark-size: 1.5pt),
+)
+#pagebreak()
 = 1.2.2. Measurement
 
 (a) $R_(14) = 199.1 Omega$
