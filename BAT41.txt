@@ -1,0 +1,54 @@
+********************************
+* Copyright:                   *
+* Vishay Intertechnology, Inc. *
+********************************
+*  Model for Vishay Schottky diode 
+*  BAT41 
+*  model is valid for 25°C to 125°C
+*
+*  VISHAY Semiconductor GmbH
+*  Hartmut Harmel, 10 July 2007
+*
+.SUBCKT bat41 1 2
+.MODEL SD D (
++ N=1.0
++ IS=11E-9
++ RS=90
++ trs1=0.014
++ IKF= 0.95
++ CJO=2.0p
++ VJ=0.805
++ M=.36
++ FC=0.5
++ TT=2E-9
++ BV=105
++ ISR=2.5e-10
++ NR=1.15
++ IBV=10
++ KF=0
++ AF=1 
++ EG=0.66
++ XTI=2
++ TBV1=0.0006)
+.model AD D (
++ N=1.80
++ IS=1.89E-9
++ RS=0.324
++ trs1=-0.0002
++ IKF= 0.097
++ CJO=1.4p
++ VJ=0.5
++ M=.34
++ FC=0.5
++ TT=6E-8
++ BV=105
++ TBV1=0.0006
++ ISR=6.4e-10
++ NR=1200
++ IBV=0.001
++ KF=0
++ AF=1
++ EG=1.15)
+D1 1 2 SD
+D3 1 2 AD
+.ENDS
