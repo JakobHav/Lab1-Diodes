@@ -1,3 +1,5 @@
+#import "@preview/lilaq:0.5.0"
+
 #set page(background: image("01_Diodes.jpg"))
 #v(206pt)
 #h(105pt)
@@ -26,10 +28,35 @@ Milan Fark
   left_header: [Jakob Haverkamp \ Milan Fark \ jh1444, #h(5pt)mf643],
 )
 #counter(page).update(1)
-= 1.2.1.
 
-(a) $R_{14} = 199.1 Omega$
+= 1.2 A variety of diodes
+
+= 1.2.1 Simulation
+
+The goal of the Simulation is to measure the characteristics of different Types of Diodes.
 
 
+== Circuit Diagrams
+
+#image("121_BAT41.jpg")
+
+= 1.2.2. Measurement
+
+(a) $R_(14) = 199.1 Omega$
+
+(b)
+#table(
+  columns: 3,
+  inset: 5pt,
+  align: horizon,
+  table.header([*Diode*], [*Forward Bias*], [*Reverse Bias*]),
+  [$D 1$ (1N4148)], [0.612 V], [0 V],
+  [$D 2$ (BAT41)], [0.382 V], [0 V],
+  [$D 3$ (ZD3V9)], [0.712 V], [0 V],
+)
+
+The results of $D 1$ and $D 2$ look fairly similar to the simulation, but all the diodes did read slightly higher voltages when measured in reality.
+
+The Zener Diode (D3) was very different in real life, because the multimeter only operates to 1.99V in Diode Test mode, so we could not read the value for reverse bias, which was approximately $3.85 V$ in the simulation.
 
 ==
