@@ -25,40 +25,67 @@ Milan Fark
   title: "Lab 1 - Diodes",
   name: "jh1444, nr254",
   header_start: 2,
+  number-align: right,
   left_header: [Jakob Haverkamp \ Milan Fark \ jh1444, #h(5pt)mf643],
 )
 #counter(page).update(1)
 #set text(
   lang: "en",
-  size: 12pt,
+  size: 11pt,
 )
 
-= 1.2 A variety of diodes
 
 = 1.2.1 Simulation
 
 The goal of the Simulation is to measure the characteristics of different Types of Diodes.
 
 
-== Circuit Diagrams
+== Circuit Diagrams:
+#v(-5pt)
 
 #figure(caption: "")[
   #image("121_BAT41.jpg")
+  #v(-15pt)
 ]
-#let (x, y) = lq.load-txt(read("./zenerdiodedata.txt"), delimiter: "\t", skip-rows: 1)
+#v(35pt)
+#let (x_si, y_si) = lq.load-txt(read("./zenerdiodedata.txt"), delimiter: "\t", skip-rows: 1)
+#let (x_st, y_st) = lq.load-txt(read("./BAT41schotkydiode.txt"), delimiter: "\t", skip-rows: 1)
+#let (x_z, y_z) = lq.load-txt(read("./1N4148Diodedata.txt"), delimiter: "\t", skip-rows: 1)
 
 == Plots:
 
-#lq.diagram(
-  width: 100%,
-  height: 40%,
-  title: [IV-Curves],
-  xlabel: $x s$,
-  ylabel: $y$,
+#figure(caption: "")[
+  #lq.diagram(
+    width: 100%,
+    height: 38%,
+    title: [IV-Curves of all three Diodes],
+    xlabel: $V_i "in" V$,
+    ylabel: $V_D "in" V$,
+    legend: (position: left + top),
+    xlim: (-5.2, 5.2),
+    ylim: (-0.0065, 0.0222),
 
-  lq.plot(x, y, mark: ".", label: [ZD3V9], mark-size: 1.5pt),
-)
-#pagebreak()
+    cycle: (
+      it => {
+        set lq.style(stroke: (paint: red.darken(0%), dash: "solid", thickness: 1pt))
+        it
+      },
+      it => {
+        set lq.style(stroke: (paint: blue.darken(20%), dash: "dashed", thickness: 1pt))
+        it
+      },
+      it => {
+        set lq.style(stroke: (paint: green.darken(20%), dash: "dotted", thickness: 1pt))
+        it
+      },
+    ),
+
+
+    lq.plot(x_st, y_st, mark: ".", label: [BAT41], mark-size: 0pt),
+    lq.plot(x_si, y_si, mark: ".", label: [1N4148], mark-size: 0pt),
+    lq.plot(x_z, y_z, mark: ".", label: [ZD3V9], mark-size: 0pt),
+  ),
+]
 = 1.2.2. Measurement
 
 (a) $R_(14) = 199.1 Omega$
