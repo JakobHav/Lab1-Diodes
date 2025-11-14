@@ -1,6 +1,6 @@
 #import "@preview/lilaq:0.5.0" as lq
 
-#set page(background: image("01_Diodes.jpg"))
+#set page(background: image("assets/frontpage.jpg"))
 #v(206pt)
 #h(105pt)
 Jakob Haverkamp
@@ -44,13 +44,13 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 #v(-5pt)
 
 #figure(caption: "Circuit Diagrams from LTSpice")[
-  #image("121_BAT41.jpg")
+  #image("assets/Circuits.jpg")
   #v(-10pt)
 ]
 #v(25pt)
-#let (x_si, y_si) = lq.load-txt(read("./zenerdiodedata.txt"), delimiter: "\t", skip-rows: 1)
-#let (x_st, y_st) = lq.load-txt(read("./BAT41schotkydiode.txt"), delimiter: "\t", skip-rows: 1)
-#let (x_z, y_z) = lq.load-txt(read("./1N4148Diodedata.txt"), delimiter: "\t", skip-rows: 1)
+#let (x_z, y_z) = lq.load-txt(read("assets/ZD3V9_sim.txt"), delimiter: "\t", skip-rows: 1)
+#let (x_st, y_st) = lq.load-txt(read("assets/BAT41_sim.txt"), delimiter: "\t", skip-rows: 1)
+#let (x_si, y_si) = lq.load-txt(read("assets/1N4148_sim.txt"), delimiter: "\t", skip-rows: 1)
 
 #let y_si = y_si.map(y => y * 1000)
 #let y_st = y_st.map(y => y * 1000)
@@ -95,9 +95,64 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 #pagebreak()
 = 1.2.2. Measurement
 
+The goal of the measurement is to verify the Simulation we created in the previous exercise.
+
+== Circuit Diagrams:
+
+
+#let (x_st, y_z1, y_z2) = lq.load-txt(read("assets/ZD3V9_real.txt"), delimiter: "\t", skip-rows: 21)
+#let (x_st, y_sch1, y_sch2) = lq.load-txt(read("assets/BAT41_real.txt"), delimiter: "\t", skip-rows: 21)
+#let (x_si, y_si1, y_si2) = lq.load-txt(read("assets/1N4148_real.txt"), delimiter: "\t", skip-rows: 21)
+
+#let y_si = y_si.map(y => y * 1000)
+#let y_st = y_st.map(y => y * 1000)
+#let y_z = y_z.map(y => y * 1000)
+
+#pagebreak()
+== Plots:
+#show: lq.theme.skyline
+
+#figure(caption: "")[
+  #lq.diagram(
+    width: 100%,
+    height: 38%,
+    title: [IV-Curves of all three Diodes],
+    xlabel: [*$V_i$* [V]],
+    ylabel: [*$V_D$* [mV]],
+    legend: (position: left + top),
+    xlim: (-5.2, 5.2),
+    ylim: (-0006.5, 0022.2),
+
+    cycle: (
+      it => {
+        set lq.style(stroke: (paint: red.darken(20%).transparentize(20%), dash: "solid", thickness: 1pt))
+        it
+      },
+      it => {
+        set lq.style(stroke: (paint: blue.darken(20%), dash: "dashed", thickness: 1pt))
+        it
+      },
+      it => {
+        set lq.style(stroke: (paint: green.darken(20%), dash: "dotted", thickness: 1pt))
+        it
+      },
+    ),
+
+
+    lq.plot(x_st, y_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
+    lq.plot(x_si, y_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
+    lq.plot(x_z, y_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
+  ),
+]
+
+
+#pagebreak()
+== Text Questions:
+
 (a) $R_(14) = 199.1 Omega$
 
 (b)
+
 #table(
   columns: 3,
   inset: 5pt,

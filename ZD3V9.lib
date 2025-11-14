@@ -1,4 +1,0 @@
-.SUBCKT ZD3v9 1 2
-D1 1 2 MD1
-.MODEL MD1 D(Bv=3.9 Ibv=10m type=Zener)
-.ENDS ZD3v9
