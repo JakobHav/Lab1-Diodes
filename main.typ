@@ -44,7 +44,7 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 #v(-5pt)
 
 #figure(caption: "Circuit Diagrams from LTSpice")[
-  #image("assets/Circuits.jpg")
+  #image("assets/circuits.jpg")
   #v(-10pt)
 ]
 #v(25pt)
@@ -100,28 +100,34 @@ The goal of the measurement is to verify the Simulation we created in the previo
 == Circuit Diagrams:
 
 
-#let (x_st, y_z1, y_z2) = lq.load-txt(read("assets/ZD3V9_real.txt"), delimiter: "\t", skip-rows: 21)
-#let (x_st, y_sch1, y_sch2) = lq.load-txt(read("assets/BAT41_real.txt"), delimiter: "\t", skip-rows: 21)
-#let (x_si, y_si1, y_si2) = lq.load-txt(read("assets/1N4148_real.txt"), delimiter: "\t", skip-rows: 21)
+#let (x_st, y_z, y_z2) = lq.load-txt(read("assets/ZD3V9_real.txt"), delimiter: "\t", skip-rows: 22, usecols: (0, 1, 2))
+/#let (x_sch, y_sch, y_sch2) = lq.load-txt(read("assets/BAT41_real.txt"), delimiter: "\t", skip-rows: 22, usecols: (0, 1, 2))
+#let (x_si, y_si, y_si2) = lq.load-txt(read("assets/1N4148_real.txt"), delimiter: "\t", skip-rows: 22, usecols: (
+  0,
+  1,
+  2,
+))
+
+// i/u
 
 #let y_si = y_si.map(y => y * 1000)
-#let y_st = y_st.map(y => y * 1000)
+#let y_sch = y_sch.map(y => y * 1000)
 #let y_z = y_z.map(y => y * 1000)
 
 #pagebreak()
 == Plots:
 #show: lq.theme.skyline
 
-#figure(caption: "")[
+#figure(caption: "F")[
   #lq.diagram(
     width: 100%,
     height: 38%,
-    title: [IV-Curves of all three Diodes],
+    // title: [IV-Curves of all three Diodes],
     xlabel: [*$V_i$* [V]],
     ylabel: [*$V_D$* [mV]],
     legend: (position: left + top),
-    xlim: (-5.2, 5.2),
-    ylim: (-0006.5, 0022.2),
+    xlim: (-0.04, 0.04),
+    // ylim: (-000, 0022.2),
 
     cycle: (
       it => {
@@ -139,9 +145,9 @@ The goal of the measurement is to verify the Simulation we created in the previo
     ),
 
 
-    lq.plot(x_st, y_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
+    lq.plot(x_sch, y_sch, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
     lq.plot(x_si, y_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
-    lq.plot(x_z, y_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
+    // lq.scatter(x_z, y_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
   ),
 ]
 
