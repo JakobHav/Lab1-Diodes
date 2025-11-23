@@ -1,8 +1,8 @@
 #import "@preview/lilaq:0.5.0" as lq
 
-#let (_, vd_z, i_z) = lq.load-txt(read("assets/ZD3V9_sim.txt"), delimiter: "\t", skip-rows: 1)
-#let (_, vd_st, i_st) = lq.load-txt(read("assets/BAT41_sim.txt"), delimiter: "\t", skip-rows: 1)
-#let (_, vd_si, i_si) = lq.load-txt(read("assets/1N4148_sim.txt"), delimiter: "\t", skip-rows: 1)
+#let (_, vd_z, i_z) = lq.load-txt(read("assets/ZD3V9_sim_ground.txt"), delimiter: "\t", skip-rows: 1)
+#let (_, vd_st, i_st) = lq.load-txt(read("assets/BAT41_sim_ground.txt"), delimiter: "\t", skip-rows: 1)
+#let (_, vd_si, i_si) = lq.load-txt(read("assets/1N4148_sim_ground.txt"), delimiter: "\t", skip-rows: 1)
 
 #let i_si = i_si.map(v => v * 1000)
 #let i_st = i_st.map(v => v * 1000)

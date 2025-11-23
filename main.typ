@@ -44,7 +44,7 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 === Circuit Diagrams:
 
 #figure(
-  caption: [Circuit Diagrams from LTSpice #footnote[Our actual command for the rightmost plot was: `V3 -4.297 4 0.01`, the one in the diagram (which we were supposed to use) did not work (bec exponential groth we think) we did the min. working values)]],
+  caption: [Circuit Diagrams from LTSpice #footnote[We had a back and forth with adding ground, and ending up connecting ground to minus in the final result, it is missing in the diagram]],
 )[
   #image("assets/circuits.jpg")
 ]
@@ -58,7 +58,7 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 Small-Signal Resistance $r_D$ for $abs(I_D) = 20 "mA"$ for:
 
 - 1N4148 Diode is $r_D approx$ 0.223 #sym.Omega
-- BAT41 Diode is $r_D approx$ \_.\_ #sym.Omega #h(5pt) (could not be estimated)#footnote[We could not calculate a value because LTSpice only generated up to (0.469 V,	18.1 mA) as described earlier and seen in @figure2, so we could not compute derivative for 20mA]
+- BAT41 Diode is $r_D approx$ \_.\_ #sym.Omega #h(5pt) (could not be estimated)
 - ZD3V9 Diode is $r_(D) approx$ 0.213 #sym.Omega (reverse and forward)
 #v(1em)
 (g)
@@ -68,7 +68,7 @@ Also, the Zener Diode has the classical Zener-Curve in the negative voltages, ha
 
 === Conclusion:
 
-We explored the IV-Curves and characteristics of the different types of diodes. The plot had the interesting attribute that it only simulated to $approx 1V$ because of the exponential nature of the curve (as seen in #text(blue)[@figure2]).
+We explored the IV-Curves and characteristics of the different types of diodes.
 #v(10pt)
 = 1.2.2. Measurement
 
@@ -230,11 +230,10 @@ New Turn-On Voltage = $0.612 "V" - 0.048 "V" = underline(0.564 "V")$
 
 (j) $delta T = 67.5°C - 19.5°C = 48°C$, #h(20pt) $(delta V) / (delta T) = (-0.048 V) / (48°C) = 1 "mV"/"°C"$
 
-Typical literature Value is $approx -2 "mV"/"°C"$
+Typical Literature Value is $approx -2 "mV"/"°C"$
 
 === Conclusion
 
-We could definitely see correspondence between temperature and resistance and measure values, although we are not quite sure why we differed from the literature value by factor 2.
 
 = 1.5. Rectifier
 
