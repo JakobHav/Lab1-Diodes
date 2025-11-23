@@ -25,7 +25,6 @@ Milan Fark
   title: "Lab 1 - Diodes",
   name: "jh1444, nr254",
   header_start: 2,
-  number-align: right,
   left_header: [Jakob Haverkamp \ Milan Fark \ jh1444, #h(5pt)mf643],
 )
 #counter(page).update(1)
@@ -34,77 +33,66 @@ Milan Fark
   size: 11pt,
 )
 
-= Experiment 1: A Variety of Diodes
+= 1.2 A Variety of Diodes
 
-= 1.2.1 Simulation
+== 1.2.1 Simulation
+
 
 The goal of the Simulation is to measure and plot the characteristics of different Types of Diodes, in this case one Si Diode (Model: 1N4148), one Schottky Diode (Model: BAT41) and one Zener Diode (Model: ZD3V9).
 
 
-== Circuit Diagrams:
+=== Circuit Diagrams:
 #v(5pt)
 
-#figure(caption: "Circuit Diagrams from LTSpice")[
+#figure(
+  caption: [Circuit Diagrams from LTSpice #footnote[Our actual command for the rightmost plot was: `V3 -4.297 4 0.01`, the one in the diagram (which we were supposed to use) did not work (bec exponential groth we think) we did the min. working values)]],
+)[
   #image("assets/circuits.jpg")
   #v(0pt)
 ]
 #v(12pt)
-#let (vi_z, _, vd_z) = lq.load-txt(read("assets/ZD3V9_sim.txt"), delimiter: "\t", skip-rows: 1)
-#let (vi_st, _, vd_st) = lq.load-txt(read("assets/BAT41_sim.txt"), delimiter: "\t", skip-rows: 1)
-#let (vi_si, _, vd_si) = lq.load-txt(read("assets/1N4148_sim.txt"), delimiter: "\t", skip-rows: 1)
 
-#let vd_si = vd_si.map(v => v * 1000)
-#let vd_st = vd_st.map(v => v * 1000)
-#let vd_z = vd_z.map(v => v * 1000)
+=== Plots:
 
-== Plots:
-#show: lq.theme.skyline
+#include "1.2.plot_sim.typ"
 
-#figure(caption: "")[
-  #lq.diagram(
-    width: 100%,
-    height: 38%,
-    title: [IV-Curves of all three Diodes],
-    xlabel: [*$V_i$* [V]],
-    ylabel: [*$I$* [mA]],
-    legend: (position: left + top),
-    // xlim: (-.0010, .0010),
-    // ylim: (-0006.5, 0022.2),
+=== Text Questions:
 
-    cycle: (
-      it => {
-        set lq.style(stroke: (paint: red.darken(20%).transparentize(20%), dash: "solid", thickness: 1pt))
-        it
-      },
-      it => {
-        set lq.style(stroke: (paint: blue.darken(20%), dash: "dashed", thickness: 1pt))
-        it
-      },
-      it => {
-        set lq.style(stroke: (paint: green.darken(20%), dash: "dotted", thickness: 1pt))
-        it
-      },
-    ),
+(f)
+Small-Signal Resistance $r_D$ for $abs(I_D) = 20 "mA"$ for:
 
+- 1N4148 Diode is $r_D approx$ 0.223 #sym.Omega
+- BAT41 Diode is $r_D approx$ - #sym.Omega#footnote[We could not calculate a value because LTSpice only generated up to (0.469 V,	18.1 mA) as described earlier and seen in @figure2, so we could not compute derivative for 20mA]
+- ZD3V9 Diode is $r_(D) approx$ 0.213 #sym.Omega (reverse and forward)
+#v(2em)
+(g)
+One essential difference between the characteristics is the breakdown voltage, which for the Schottky diode is $approx 0.3$ V, for the Si diode is $approx 0.6$ V and for the Zener diode is $approx 0.7$ V.
 
-    lq.plot(vi_st, vd_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
-    lq.plot(vi_si, vd_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
-    lq.plot(vi_z, vd_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
-  ),
-]
+Also, the Zener Diode has the classical Zener-Curve in the negative voltages, having a reverse breakdown voltage of $approx 3.8$ V, whereas the other ones stay at 0.0 A.
 
-#pagebreak()
+\
+=== Conclusion:
+
+We explored the IV-Curves and characteristics of the different types of diodes. The plot had the interesting attribute that it only simulated to $approx 1V$ because of the exponential nature of the curve (as seen in #text(blue)[@figure2]).
+#v(10pt)
 = 1.2.2. Measurement
 
 The goal of the measurement is to verify the Simulation we created in the previous exercise.
 
 == Circuit Diagrams:
 
+#figure(caption: "Schematic of the diode characteristics circuit")[
+  #image("assets/1.2.2.circuit.jpg", width: 70%)
+  #v(0pt)
+]
+#pagebreak()
+=== Plots:
 
+#include "1.2.plot_real.typ"
 
 == Text Questions:
 
-(a) $R_(14) = 199.1 Omega$
+(a) The true value of  $R_(14) approx 199.1 Omega$
 
 (b)
 
@@ -126,10 +114,37 @@ The results of $D 1$ and $D 2$ look fairly similar to the simulation, but all th
 
 The Zener Diode (D3) was very different in real life, because the multimeter only operates to 1.99V in Diode Test mode, so we could not read the value for reverse bias, which was approximately $3.85 V$ in the simulation.
 
-==
+=== Conclusion
 
-= 1.3.3
+We measured and compared our results to the simulations and found similar results.
 
+= 1.3 Light-emitting diodes
+
+== 1.3.1 Simulation
+
+=== Circuit Diagrams
+=== Plots
+
+#include "1.3.plot_sim.typ"
+
+=== Conclusion
+
+== 1.3.2. Measurement
+
+The goal of the measurement was to see the LED Brightness and to mesaure the LED characteristics.
+
+=== Circuit Diagrams
+
+#figure(caption: "Schematic of the LED characteristics circuit")[
+  #image("assets/1.3.2.circuit.jpg", width: 60%)
+]
+#v(10pt)
+
+=== Plots
+
+#include "1.3.plot_real.typ"
+
+=== Text Questions
 (a) \
 #table(
   columns: 2,
@@ -155,3 +170,55 @@ The Zener Diode (D3) was very different in real life, because the multimeter onl
   [$D 10 "& " D 11$], [Dim], [Off],
 )
 
+(g)
+=== Conclusion
+
+= 1.4. Temperatur dependence
+
+== 1.4.1. Simulation
+
+=== Circuit Diagrams
+=== Plots
+#include "1.4.plot_sim.typ"
+=== Conclusion
+
+== 1.4.2. Measurement
+
+=== Circuit Diagrams
+
+#figure(caption: [Schematic of the _bridge_ circuit])[
+  #image("assets/1.4.2.circuit.jpg", width: 35%)
+]
+
+=== Plots
+#include "1.4.plot_real.typ"
+
+=== Text Questions
+
+=== Conclusion
+
+= 1.5. Rectifier
+
+== 1.5.1. Simulation
+
+=== Circuit Diagrams
+
+
+=== Plots
+#include "1.5.plot_sim.typ"
+
+=== Text Questions
+=== Conclusion
+
+== 1.5.2. Measurement
+
+=== Circuit Diagrams
+#figure(caption: [Schematic of the _rectifier_ circuit])[
+  #image("assets/1.5.2.circuit.jpg", width: 70%)
+]
+=== Plots
+
+#include "1.5.plot_real.typ"
+
+=== Text Questions
+=== Conclusion
