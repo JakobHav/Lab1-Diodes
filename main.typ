@@ -51,22 +51,7 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 #v(12pt)
 #let (vi_z, vd_z) = lq.load-txt(read("assets/ZD3V9_sim.txt"), delimiter: "\t", skip-rows: 1)
 #let (vi_st, vd_st) = lq.load-txt(read("assets/BAT41_sim.txt"), delimiter: "\t", skip-rows: 1)
-#let (vi_si, vd_si) = lq.load-txt(read("assets/1N4148_sim.txt"), delimiter: "\t", skip-rows: 1)
-
-#let i_z = ()
-#for (vi, vd) in vi_z.zip(vd_z) {
-  i_z.push((vi * 1000 - vd * 1000) / 200)
-}
-
-#let i_si = ()
-#for (vi, vd) in vi_si.zip(vd_si) {
-  i_si.push((vi * 1000 - vd * 1000) / 200)
-}
-
-#let i_st = ()
-#for (vi, vd) in vi_st.zip(vd_st) {
-  i_st.push((vi * 1000 - vd * 1000) / 200)
-}
+#let (vi_si, _, vd_si) = lq.load-txt(read("assets/1N4148_sim.txt"), delimiter: "\t", skip-rows: 1)
 
 #let vd_si = vd_si.map(v => v * 1000)
 #let vd_st = vd_st.map(v => v * 1000)
@@ -81,7 +66,7 @@ The goal of the Simulation is to measure and plot the characteristics of differe
     height: 38%,
     title: [IV-Curves of all three Diodes],
     xlabel: [*$V_i$* [V]],
-    ylabel: [*$V_D$* [mV]],
+    ylabel: [*$I$* [mA]],
     legend: (position: left + top),
     // xlim: (-.0010, .0010),
     // ylim: (-0006.5, 0022.2),
@@ -102,9 +87,9 @@ The goal of the Simulation is to measure and plot the characteristics of differe
     ),
 
 
-    lq.plot(vd_st, i_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
-    lq.plot(vd_si, i_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
-    lq.plot(vd_z, i_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
+    lq.plot(vi_st, vd_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
+    lq.plot(vi_si, vd_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
+    lq.plot(vi_z, vd_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
   ),
 ]
 
@@ -117,15 +102,6 @@ The goal of the measurement is to verify the Simulation we created in the previo
 
 
 
-#pagebreak()
-== Plots:
-#show: lq.theme.skyline
-
-#figure(caption: "F")[
-]
-
-
-#pagebreak()
 == Text Questions:
 
 (a) $R_(14) = 199.1 Omega$
