@@ -50,7 +50,7 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 ]
 #v(12pt)
 #let (vi_z, vd_z) = lq.load-txt(read("assets/ZD3V9_sim.txt"), delimiter: "\t", skip-rows: 1)
-#let (vi_st, vd_st) = lq.load-txt(read("assets/BAT41_sim.txt"), delimiter: "\t", skip-rows: 1)
+#let (vi_st, _, vd_st) = lq.load-txt(read("assets/BAT41_sim.txt"), delimiter: "\t", skip-rows: 1)
 #let (vi_si, _, vd_si) = lq.load-txt(read("assets/1N4148_sim.txt"), delimiter: "\t", skip-rows: 1)
 
 #let vd_si = vd_si.map(v => v * 1000)
