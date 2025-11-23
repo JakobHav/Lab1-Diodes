@@ -206,7 +206,7 @@ The goal of the simulation was to see how the diodes behave under different temp
 ]
 
 === Plots
-// #include "1.4.plot_sim.typ"
+#include "1.4.plot_sim.typ"
 === Conclusion
 
 We could clearly see the differences in operating temperatures.
@@ -236,7 +236,7 @@ The goal was to simulate a full-wave rectifier with 1N4148 Si diodes.
 === Circuit Diagrams
 
 #figure(caption: [LTSpice circuit of full-wave rectifier])[
-  #image("assets/151_circuit.jpg", width: 33%)
+  #image("assets/151_circuit.jpg", width: 31%)
 ]
 
 === Plots
