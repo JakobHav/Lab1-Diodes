@@ -22,9 +22,10 @@
 }
 
 #let vd_z = vd_z.map(v => v * -1)
+
 #show: lq.theme.skyline
 
-#figure(caption: "Measured IV-Curves of all three Diodes")[
+#figure(caption: [Measured IV-Curves of all three Diodes #footnote[Zener Diode mirrored at (0, 0) for better visual]])[
   #lq.diagram(
     width: 100%,
     height: 33%,
@@ -33,26 +34,33 @@
     ylabel: [*Current* [mA]],
     legend: (position: left + top),
     xlim: (-5, 1),
-    // ylim: (-0006.5, 0022.2),
+    // ylim: (-0, 4),
 
     cycle: (
       it => {
-        set lq.style(stroke: (paint: red.darken(20%).transparentize(20%), dash: "solid", thickness: .7pt))
+        set lq.style(fill: red.darken(20%).transparentize(20%))
         it
       },
       it => {
-        set lq.style(stroke: (paint: blue.darken(20%), dash: "dashed", thickness: .7pt))
+        set lq.style(fill: blue.darken(20%), stroke: (thickness: 1pt, dash: "dashed"))
         it
       },
       it => {
-        set lq.style(stroke: (paint: green.darken(20%), dash: "dotted", thickness: .7pt))
+        set lq.style(fill: green.darken(20%), stroke: (thickness: 1pt, dash: "dotted"))
         it
       },
     ),
 
 
     lq.plot(vd_st, i_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
-    lq.plot(vd_si, i_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
+    lq.plot(
+      vd_si,
+      i_si,
+      stroke: (paint: blue.darken(20%), thickness: .7pt, dash: "dashed"),
+      mark: ".",
+      label: [1N4148 (Si Diode)],
+      mark-size: 0pt,
+    ),
     lq.plot(vd_z, i_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
   )
 ] <figure4>

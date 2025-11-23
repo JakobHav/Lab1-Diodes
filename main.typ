@@ -62,7 +62,7 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 Small-Signal Resistance $r_D$ for $abs(I_D) = 20 "mA"$ for:
 
 - 1N4148 Diode is $r_D approx$ 0.223 #sym.Omega
-- BAT41 Diode is $r_D approx$ - #sym.Omega#footnote[We could not calculate a value because LTSpice only generated up to (0.469 V,	18.1 mA) as described earlier and seen in @figure2, so we could not compute derivative for 20mA]
+- BAT41 Diode is $r_D approx$ \_.\_ #sym.Omega #h(5pt) (could not be estimated)#footnote[We could not calculate a value because LTSpice only generated up to (0.469 V,	18.1 mA) as described earlier and seen in @figure2, so we could not compute derivative for 20mA]
 - ZD3V9 Diode is $r_(D) approx$ 0.213 #sym.Omega (reverse and forward)
 #v(2em)
 (g)
@@ -70,7 +70,6 @@ One essential difference between the characteristics is the breakdown voltage, w
 
 Also, the Zener Diode has the classical Zener-Curve in the negative voltages, having a reverse breakdown voltage of $approx 3.8$ V, whereas the other ones stay at 0.0 A.
 
-\
 === Conclusion:
 
 We explored the IV-Curves and characteristics of the different types of diodes. The plot had the interesting attribute that it only simulated to $approx 1V$ because of the exponential nature of the curve (as seen in #text(blue)[@figure2]).
@@ -116,8 +115,8 @@ The Zener Diode (D3) was very different in real life, because the multimeter onl
 
 === Conclusion
 
-We measured and compared our results to the simulations and found similar results.
-
+We measured and compared the real-word IV-Curves of the three different diodes, compared our results to the simulation and found similar results.
+#v(10pt)
 = 1.3 Light-emitting diodes
 
 == 1.3.1 Simulation
@@ -137,7 +136,18 @@ The goal of the simulation was to visualize the IV-Curves for a green, a red and
 
 #include "1.3.plot_sim.typ"
 
+=== Text Questions:
+(b) $V_f$-Values:
+- Red LED $approx 2.5$V
+- Yellow LED $approx 2.8$V
+- Green LED $approx 3.1$V
+
+(c) Red is the brightest LED, then yellow and then green
+
 === Conclusion
+We successfully measured the IV-Curves of the three different-colored LEDs and looked at their relative brightness.
+
+#v(10pt)
 
 == 1.3.2. Measurement
 
@@ -146,38 +156,42 @@ The goal of the measurement was to see the LED Brightness and to mesaure the LED
 === Circuit Diagrams
 
 #figure(caption: "Schematic of the LED characteristics circuit")[
-  #image("assets/1.3.2.circuit.jpg", width: 60%)
+  #image("assets/1.3.2.circuit.jpg", width: 49%)
 ]
 #v(10pt)
 
 === Text Questions
-(a) \
+(a) $V_f$ measured with handheld multimeter\
 #table(
   columns: 2,
   inset: 5pt,
   align: horizon + center,
   table.header([*LED*], [*$V_f$* [V]]),
-  [$D 11$], [$>=2$],
-  [$D 10$], [1.858],
-  [$D 9$], [1.828],
-  [$D 8$], [1.760],
+  [$D 11$ (blue)], [$>=2$],
+  [$D 10$ (green)], [1.858],
+  [$D 9$ (yellow)], [1.828],
+  [$D 8$ (red)], [1.760],
 )
-
-(f)
+\
+(f) Relative brightnesses of the different LEDs
 #table(
   columns: 3,
   inset: 5pt,
-  align: (left, center, center),
+  align: (center, center, center),
   table.header([*Kombination (L & R)*], [*LED 1 (L)* ], [*LED 2 (R)*]),
   [$D 8 "& "D 9$], [Bright], [Bright],
-  [$D 8 "& " D 10$], [Bright], [Not so bright],
-  [$D 8 "& " D 11$], [Bright], [Off],
-  [$D 9 "& " D 11$], [A little less bright], [Off],
-  [$D 10 "& " D 11$], [Dim], [Off],
+  [$D 8 " &" D 10$], [Bright], [Not so bright],
+  [$D 8 " &" D 11$], [Bright], [Off],
+  [$D 9 " &" D 11$], [A little less bright], [Off],
+  [$D 10 " & " D 11$], [Dim], [Off],
 )
-
+\
 (g)
+Red has the smallest breakdown voltage, so it is the brightest LED in all configurations. The voltage of the yellow LED is a little more, and we see that it is a little more dim than red when connected with the blue one.  The green LED has an ever higher one, so it is quite dim, blue is even more and never turns on.
+
 === Conclusion
+
+We could see all simulated effects in real-world brightness and verified $V_f$ with a handheld multimeter.
 
 = 1.4. Temperatur dependence
 
@@ -211,10 +225,24 @@ The goal was to simulate a full-wave rectifier with 1N4148 Si diodes.
 
 === Circuit Diagrams
 
+#figure(caption: [LTSpice circuit of full-wave rectifier])[
+  #image("assets/151_circuit.jpg", width: 33%)
+]
+
 === Plots
 #include "1.5.plot_sim.typ"
 
 === Text Questions
+
+
+(c) $C_L = 4.4 space mu$F, $R_L = 1.1 space "k" Omega$ is almost the same output as $C_L = 2.2 space mu$F, $R_L = 2.2 space "k" Omega$ as seen in @figure9
+
+(e) Hum Voltages:
+- No $C_L approx 3.7$ V
+- $2.2 mu "F" approx 2.5$ V
+- $22 mu "F" approx 0.5$ V
+- $220 mu "F" approx 0.1$ V
+
 === Conclusion
 
 == 1.5.2. Measurement

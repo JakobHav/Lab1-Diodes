@@ -13,7 +13,7 @@
 #figure(caption: "LED IV Curves")[
   #lq.diagram(
     width: 100%,
-    height: 38%,
+    height: 30%,
     // title: [],
     xlabel: [*Voltage Drop* [V]],
     ylabel: [*Current* [A]],
