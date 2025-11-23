@@ -122,12 +122,14 @@ We measured and compared our results to the simulations and found similar result
 
 == 1.3.1 Simulation
 
+The goal of the simulation was to visualize the IV-Curves for a green, a red and a yellow LED.
+
 === Circuit Diagrams
 
 #figure(
-  caption: [Circuit Diagrams from LTSpice #footnote[Our actual command for the rightmost plot was: `V3 -4.297 4 0.01`, the one in the diagram (which we were supposed to use) did not work (bec exponential groth we think) we did the min. working values)]],
+  caption: [LED Circuit Diagrams from LTSpice],
 )[
-  #image("assets/LED_circuit.jpg", width: 100%)
+  #image("assets/LEDs.jpg", width: 100%)
   #v(0pt)
 ]
 
@@ -147,10 +149,6 @@ The goal of the measurement was to see the LED Brightness and to mesaure the LED
   #image("assets/1.3.2.circuit.jpg", width: 60%)
 ]
 #v(10pt)
-
-=== Plots
-
-#include "1.3.plot_real.typ"
 
 === Text Questions
 (a) \
@@ -209,8 +207,9 @@ The goal of the measurement was to see the LED Brightness and to mesaure the LED
 
 == 1.5.1. Simulation
 
-=== Circuit Diagrams
+The goal was to simulate a full-wave rectifier with 1N4148 Si diodes.
 
+=== Circuit Diagrams
 
 === Plots
 #include "1.5.plot_sim.typ"
