@@ -10,13 +10,24 @@
 #let t2 = t2.map(v => (v + 0.0023) * 1000 + 20)
 #let t3 = t3.map(v => (v + 0.0035) * 1000 + 20)
 
+#let vr0 = vr0.map(v => -1 * v)
+#let vr1 = vr1.map(v => -1 * v)
+#let vr2 = vr2.map(v => -1 * v)
+#let vr3 = vr3.map(v => -1 * v)
+
 
 #show: lq.theme.skyline
+
+#show: lq.set-grid(
+  stroke: black.transparentize(75%) + 0.25pt,
+  stroke-sub: 0.1pt,
+  sub: true,
+)
 
 #figure(caption: "Measured Difference in Voltage")[
   #lq.diagram(
     width: 80%,
-    height: 32%,
+    height: 27%,
     // title: [],
     xlabel: [*Time* [ms]],
     ylabel: [*Voltage* [V]],
@@ -26,19 +37,19 @@
 
     cycle: (
       it => {
-        set lq.style(stroke: (paint: red.darken(20%).transparentize(20%), dash: "solid", thickness: 1pt))
+        set lq.style(stroke: (paint: blue.darken(20%).transparentize(20%), dash: "solid", thickness: 1pt))
         it
       },
       it => {
-        set lq.style(stroke: (paint: blue.darken(20%), dash: "dashed", thickness: 1.5pt))
+        set lq.style(stroke: (paint: green.darken(-20%), dash: "dashed", thickness: 1.5pt))
         it
       },
       it => {
-        set lq.style(stroke: (paint: green.darken(20%), dash: "dotted", thickness: 1pt))
+        set lq.style(stroke: (paint: purple.darken(20%), dash: "dotted", thickness: 1pt))
         it
       },
       it => {
-        set lq.style(stroke: (paint: purple.lighten(20%), dash: "solid", thickness: 1pt))
+        set lq.style(stroke: (paint: red.lighten(20%), dash: "densely-dotted", thickness: 1pt))
         it
       },
     ),
@@ -49,4 +60,4 @@
     lq.plot(t2, vr2, mark: ".", label: [22 #sym.mu F], mark-size: 0pt),
     lq.plot(t3, vr3, mark: ".", label: [220 #sym.mu F], mark-size: 0pt),
   )
-] <figure4>
+]

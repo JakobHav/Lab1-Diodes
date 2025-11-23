@@ -18,7 +18,7 @@ Milan Fark
 
 #show: doc => conf(
   doc,
-  subject: "Elektronics Laboratory",
+  subject: "Electronics Laboratory",
   date: "12.11.2025",
   prof: "Prof. Dr. Hans Zappe",
   semester: "WS 25/26",
@@ -42,16 +42,12 @@ The goal of the Simulation is to measure and plot the characteristics of differe
 
 
 === Circuit Diagrams:
-#v(5pt)
 
 #figure(
   caption: [Circuit Diagrams from LTSpice #footnote[Our actual command for the rightmost plot was: `V3 -4.297 4 0.01`, the one in the diagram (which we were supposed to use) did not work (bec exponential groth we think) we did the min. working values)]],
 )[
   #image("assets/circuits.jpg")
-  #v(0pt)
 ]
-#v(12pt)
-
 === Plots:
 
 #include "1.2.plot_sim.typ"
@@ -64,7 +60,7 @@ Small-Signal Resistance $r_D$ for $abs(I_D) = 20 "mA"$ for:
 - 1N4148 Diode is $r_D approx$ 0.223 #sym.Omega
 - BAT41 Diode is $r_D approx$ \_.\_ #sym.Omega #h(5pt) (could not be estimated)#footnote[We could not calculate a value because LTSpice only generated up to (0.469 V,	18.1 mA) as described earlier and seen in @figure2, so we could not compute derivative for 20mA]
 - ZD3V9 Diode is $r_(D) approx$ 0.213 #sym.Omega (reverse and forward)
-#v(2em)
+#v(1em)
 (g)
 One essential difference between the characteristics is the breakdown voltage, which for the Schottky diode is $approx 0.3$ V, for the Si diode is $approx 0.6$ V and for the Zener diode is $approx 0.7$ V.
 
@@ -82,7 +78,6 @@ The goal of the measurement is to verify the Simulation we created in the previo
 
 #figure(caption: "Schematic of the diode characteristics circuit")[
   #image("assets/1.2.2.circuit.jpg", width: 70%)
-  #v(0pt)
 ]
 #pagebreak()
 === Plots:
@@ -213,19 +208,33 @@ We could clearly see the differences in operating temperatures.
 
 == 1.4.2. Measurement
 
+The goal of the measurement is to see the influence of the temerature over the diodes in real life.
+
 === Circuit Diagrams
 
 #figure(caption: [Schematic of the _bridge_ circuit])[
   #image("assets/1.4.2.circuit.jpg", width: 35%)
 ]
 
-=== Plots
-#include "1.4.plot_real.typ"
-
 === Text Questions
+
+(a) We measured 1078 #sym.Omega, that corresponds to 19.5 °C
+
+(h) $V_(M P 60)-V_(M P 58) approx -48.1 "mV"$
+
+Original Turn-On Voltage: 0.612 V
+
+New Turn-On Voltage = $0.612 "V" - 0.048 "V" = underline(0.564 "V")$
+
+(i) 1270 #sym.Omega, corresponds to 67.5°C
+
+(j) $delta T = 67.5°C - 19.5°C = 48°C$, #h(20pt) $(delta V) / (delta T) = (-0.048 V) / (48°C) = 1 "mV"/"°C"$
+
+Typical literature Value is $approx -2 "mV"/"°C"$
 
 === Conclusion
 
+We could definitely see correspondence between temperature and resistance and measure values, although we are not quite sure why we differed from the literature value by factor 2.
 
 = 1.5. Rectifier
 
@@ -259,6 +268,8 @@ We clearly saw full waves being full waves being rectified and could see hum-vol
 
 == 1.5.2. Measurement
 
+The goal of the measurement was to measure the full-wave rectifier and its behaviour.
+
 === Circuit Diagrams
 #figure(caption: [Schematic of the _rectifier_ circuit])[
   #image("assets/1.5.2.circuit.jpg", width: 70%)
@@ -268,4 +279,13 @@ We clearly saw full waves being full waves being rectified and could see hum-vol
 #include "1.5.plot_real.typ"
 
 === Text Questions
+
+(g) Hum Voltages:
+- $"Only R" approx 3.2$ V
+- $2.2 mu "F" approx 2.2$ V
+- $22 mu "F" approx 0.45$ V
+- $220 mu "F" approx 0.05$ V
+
 === Conclusion
+
+The measured values and hum-voltages look a little chunky but really similar to the simulation. This is fun!

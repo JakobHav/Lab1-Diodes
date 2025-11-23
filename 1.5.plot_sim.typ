@@ -15,7 +15,7 @@
 #show: lq.theme.skyline
 
 #show: lq.set-grid(
-  stroke: black.transparentize(50%) + 0.25pt,
+  stroke: black.transparentize(75%) + 0.25pt,
   stroke-sub: 0.1pt,
   sub: true,
 )
