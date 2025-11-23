@@ -1,31 +1,16 @@
 #import "@preview/lilaq:0.5.0" as lq
 
-#let (_, vi_z, vd_z) = lq.load-txt(read("assets/ZD3V9_real_neu.txt"), delimiter: "\t", skip-rows: 20)
-#let (_, vi_st, vd_st) = lq.load-txt(read("assets/BAT41_real_neu.txt"), delimiter: "\t", skip-rows: 20)
-#let (_, vi_si, vd_si) = lq.load-txt(read("assets/1N4148_real_neu.txt"), delimiter: "\t", skip-rows: 20)
+#let (t0, vr0, vi0) = lq.load-txt(read("assets/rectifier_real_onlyR.txt"), delimiter: "\t", skip-rows: 20)
+#let (t1, vr1, vi1) = lq.load-txt(read("assets/rectifier_real_C1.txt"), delimiter: "\t", skip-rows: 20)
+#let (t2, vr2, vi2) = lq.load-txt(read("assets/rectifier_real_C2.txt"), delimiter: "\t", skip-rows: 20)
+#let (t3, vr3, vi3) = lq.load-txt(read("assets/rectifier_real_C3.txt"), delimiter: "\t", skip-rows: 20)
 
-#let i_z = ()
+#let t0 = t0.map(v => v + 0.001)
 
-#for (vi, vd) in vi_z.zip(vd_z) {
-  i_z.push(-1000 * (vi - vd) / 200)
-}
 
-#let i_st = ()
-
-#for (vi, vd) in vi_st.zip(vd_st) {
-  i_st.push(1000 * (vi - vd) / 200)
-}
-
-#let i_si = ()
-
-#for (vi, vd) in vi_si.zip(vd_si) {
-  i_si.push(1000 * (vi - vd) / 200)
-}
-
-#let vd_z = vd_z.map(v => v * -1)
 #show: lq.theme.skyline
 
-#figure(caption: "Measured IV-Curves of all three Diodes")[
+#figure(caption: "Measured Rectified Voltage")[
   #lq.diagram(
     width: 100%,
     height: 33%,
@@ -33,7 +18,7 @@
     xlabel: [*$V_D$* [V]],
     ylabel: [*$I$* [mA]],
     legend: (position: left + top),
-    xlim: (-5, 1),
+    // xlim: (-5, 1),
     // ylim: (-0006.5, 0022.2),
 
     cycle: (
@@ -49,11 +34,16 @@
         set lq.style(stroke: (paint: green.darken(20%), dash: "dotted", thickness: .7pt))
         it
       },
+      it => {
+        set lq.style(stroke: (paint: yellow.darken(20%), dash: "dotted", thickness: .7pt))
+        it
+      },
     ),
 
 
-    lq.plot(vd_st, i_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
-    lq.plot(vd_si, i_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
-    lq.plot(vd_z, i_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
+    lq.plot(t0, vi0, mark: ".", label: [Only R], mark-size: 0pt),
+    lq.plot(t1, vi1, mark: ".", label: [2,2 #sym.mu F], mark-size: 0pt),
+    lq.plot(t2, vi2, mark: ".", label: [22 #sym.mu F], mark-size: 0pt),
+    lq.plot(t3, vi3, mark: ".", label: [220 #sym.mu F], mark-size: 1pt),
   )
 ] <figure4>

@@ -123,6 +123,14 @@ We measured and compared our results to the simulations and found similar result
 == 1.3.1 Simulation
 
 === Circuit Diagrams
+
+#figure(
+  caption: [Circuit Diagrams from LTSpice #footnote[Our actual command for the rightmost plot was: `V3 -4.297 4 0.01`, the one in the diagram (which we were supposed to use) did not work (bec exponential groth we think) we did the min. working values)]],
+)[
+  #image("assets/LED_circuit.jpg", width: 100%)
+  #v(0pt)
+]
+
 === Plots
 
 #include "1.3.plot_sim.typ"

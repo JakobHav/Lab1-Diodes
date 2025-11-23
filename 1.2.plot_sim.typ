@@ -19,7 +19,7 @@
     xlabel: [*$V_D$* [V]],
     ylabel: [*$I$* [mA]],
     legend: (position: left + top),
-    xlim: (-4, 1),
+    xlim: (-5, 1),
     // ylim: (-0006.5, 0022.2),
 
     cycle: (
