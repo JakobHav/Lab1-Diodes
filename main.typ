@@ -34,6 +34,7 @@ Milan Fark
   size: 11pt,
 )
 
+= Experiment 1: A Variety of Diodes
 
 = 1.2.1 Simulation
 
@@ -47,14 +48,29 @@ The goal of the Simulation is to measure and plot the characteristics of differe
   #image("assets/circuits.jpg")
   #v(-10pt)
 ]
-#v(25pt)
-#let (x_z, y_z) = lq.load-txt(read("assets/ZD3V9_sim.txt"), delimiter: "\t", skip-rows: 1)
-#let (x_st, y_st) = lq.load-txt(read("assets/BAT41_sim.txt"), delimiter: "\t", skip-rows: 1)
-#let (x_si, y_si) = lq.load-txt(read("assets/1N4148_sim.txt"), delimiter: "\t", skip-rows: 1)
+#v(12pt)
+#let (vi_z, vd_z) = lq.load-txt(read("assets/ZD3V9_sim.txt"), delimiter: "\t", skip-rows: 1)
+#let (vi_st, vd_st) = lq.load-txt(read("assets/BAT41_sim.txt"), delimiter: "\t", skip-rows: 1)
+#let (vi_si, vd_si) = lq.load-txt(read("assets/1N4148_sim.txt"), delimiter: "\t", skip-rows: 1)
 
-#let y_si = y_si.map(y => y * 1000)
-#let y_st = y_st.map(y => y * 1000)
-#let y_z = y_z.map(y => y * 1000)
+#let i_z = ()
+#for (vi, vd) in vi_z.zip(vd_z) {
+  i_z.push((vi * 1000 - vd * 1000) / 200)
+}
+
+#let i_si = ()
+#for (vi, vd) in vi_si.zip(vd_si) {
+  i_si.push((vi * 1000 - vd * 1000) / 200)
+}
+
+#let i_st = ()
+#for (vi, vd) in vi_st.zip(vd_st) {
+  i_st.push((vi * 1000 - vd * 1000) / 200)
+}
+
+#let vd_si = vd_si.map(v => v * 1000)
+#let vd_st = vd_st.map(v => v * 1000)
+#let vd_z = vd_z.map(v => v * 1000)
 
 == Plots:
 #show: lq.theme.skyline
@@ -67,8 +83,8 @@ The goal of the Simulation is to measure and plot the characteristics of differe
     xlabel: [*$V_i$* [V]],
     ylabel: [*$V_D$* [mV]],
     legend: (position: left + top),
-    xlim: (-5.2, 5.2),
-    ylim: (-0006.5, 0022.2),
+    // xlim: (-.0010, .0010),
+    // ylim: (-0006.5, 0022.2),
 
     cycle: (
       it => {
@@ -86,9 +102,9 @@ The goal of the Simulation is to measure and plot the characteristics of differe
     ),
 
 
-    lq.plot(x_st, y_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
-    lq.plot(x_si, y_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
-    lq.plot(x_z, y_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
+    lq.plot(vd_st, i_st, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
+    lq.plot(vd_si, i_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
+    lq.plot(vd_z, i_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
   ),
 ]
 
@@ -100,55 +116,12 @@ The goal of the measurement is to verify the Simulation we created in the previo
 == Circuit Diagrams:
 
 
-#let (x_st, y_z, y_z2) = lq.load-txt(read("assets/ZD3V9_real.txt"), delimiter: "\t", skip-rows: 22, usecols: (0, 1, 2))
-/#let (x_sch, y_sch, y_sch2) = lq.load-txt(read("assets/BAT41_real.txt"), delimiter: "\t", skip-rows: 22, usecols: (0, 1, 2))
-#let (x_si, y_si, y_si2) = lq.load-txt(read("assets/1N4148_real.txt"), delimiter: "\t", skip-rows: 22, usecols: (
-  0,
-  1,
-  2,
-))
-
-// i/u
-
-#let y_si = y_si.map(y => y * 1000)
-#let y_sch = y_sch.map(y => y * 1000)
-#let y_z = y_z.map(y => y * 1000)
 
 #pagebreak()
 == Plots:
 #show: lq.theme.skyline
 
 #figure(caption: "F")[
-  #lq.diagram(
-    width: 100%,
-    height: 38%,
-    // title: [IV-Curves of all three Diodes],
-    xlabel: [*$V_i$* [V]],
-    ylabel: [*$V_D$* [mV]],
-    legend: (position: left + top),
-    xlim: (-0.04, 0.04),
-    // ylim: (-000, 0022.2),
-
-    cycle: (
-      it => {
-        set lq.style(stroke: (paint: red.darken(20%).transparentize(20%), dash: "solid", thickness: 1pt))
-        it
-      },
-      it => {
-        set lq.style(stroke: (paint: blue.darken(20%), dash: "dashed", thickness: 1pt))
-        it
-      },
-      it => {
-        set lq.style(stroke: (paint: green.darken(20%), dash: "dotted", thickness: 1pt))
-        it
-      },
-    ),
-
-
-    lq.plot(x_sch, y_sch, mark: ".", label: [BAT41 #h(1pt) (Schottky Diode)], mark-size: 0pt),
-    lq.plot(x_si, y_si, mark: ".", label: [1N4148 (Si Diode)], mark-size: 0pt),
-    // lq.scatter(x_z, y_z, mark: ".", label: [ZD3V9 (Zener Diode)], mark-size: 0pt),
-  ),
 ]
 
 
