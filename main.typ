@@ -197,10 +197,19 @@ We could see all simulated effects in real-world brightness and verified $V_f$ w
 
 == 1.4.1. Simulation
 
+The goal of the simulation was to see how the diodes behave under different temperatures.
+
 === Circuit Diagrams
+
+#figure(caption: [LTSpice circuit diagram of Temperatue Sweep])[
+  #image("assets/141_TempSweep.jpg", width: 35%)
+]
+
 === Plots
-#include "1.4.plot_sim.typ"
+// #include "1.4.plot_sim.typ"
 === Conclusion
+
+We could clearly see the differences in operating temperatures.
 
 == 1.4.2. Measurement
 
@@ -216,6 +225,7 @@ We could see all simulated effects in real-world brightness and verified $V_f$ w
 === Text Questions
 
 === Conclusion
+
 
 = 1.5. Rectifier
 
@@ -244,6 +254,8 @@ The goal was to simulate a full-wave rectifier with 1N4148 Si diodes.
 - $220 mu "F" approx 0.1$ V
 
 === Conclusion
+
+We clearly saw full waves being full waves being rectified and could see hum-voltages.
 
 == 1.5.2. Measurement
 

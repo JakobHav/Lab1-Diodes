@@ -15,8 +15,8 @@
 
 #figure(caption: "Measured Difference in Voltage")[
   #lq.diagram(
-    width: 100%,
-    height: 38%,
+    width: 80%,
+    height: 32%,
     // title: [],
     xlabel: [*Time* [ms]],
     ylabel: [*Voltage* [V]],

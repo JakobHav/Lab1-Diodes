@@ -22,8 +22,8 @@
 
 #figure(caption: "Full-wave rectifier output")[
   #lq.diagram(
-    width: 100%,
-    height: 30%,
+    width: 80%,
+    height: 27%,
     // title: [],
     xlabel: [*time* [ms]],
     ylabel: [*Outpul Voltage* [V]],
