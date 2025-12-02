@@ -27,8 +27,8 @@
 
 #figure(caption: [Measured IV-Curves of all three Diodes #footnote[Zener Diode mirrored at (0, 0) for better visual]])[
   #lq.diagram(
-    width: 100%,
-    height: 33%,
+    width: 80%,
+    height: 27%,
     // title: [],
     xlabel: [*Voltage Drop* [V]],
     ylabel: [*Current* [mA]],
